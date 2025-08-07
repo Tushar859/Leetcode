@@ -8,8 +8,9 @@ public:
             freq[nums[i]]++;
         }
         for(auto x : freq){
-            while(x.second--){
+            while(x.second!=0){
                sorted.push_back(x.first);
+            x.second--;
             }
            
         }
