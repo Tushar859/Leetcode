@@ -6,9 +6,6 @@ public:
             freq[nums[i]]++;
         }
         int ans =0;
-        for(auto n: freq){
-            cout<<n.first<<"->"<<n.second<<endl;
-        }
             for(auto n: freq){
             if(n.second<2){
                 ans=n.first;
