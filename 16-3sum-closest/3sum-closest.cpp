@@ -1,30 +1,32 @@
+#include <bits/stdc++.h>
+using namespace std;
+
 class Solution {
 public:
     int threeSumClosest(vector<int>& nums, int target) {
         sort(nums.begin(), nums.end());
         int n = nums.size();
-        int closestSum = nums[0] + nums[1] + nums[2]; // initial sum
-        
+        int closestSum = nums[0] + nums[1] + nums[2]; // initialize with first 3 elements
+
         for (int i = 0; i < n - 2; i++) {
             int left = i + 1, right = n - 1;
             while (left < right) {
-                int sum = nums[i] + nums[left] + nums[right];
-                
-                // Update closest sum if needed
-                if (abs(sum - target) < abs(closestSum - target)) {
-                    closestSum = sum;
+                int currSum = nums[i] + nums[left] + nums[right];
+
+                if (abs(currSum - target) < abs(closestSum - target)) {
+                    closestSum = currSum;
                 }
-                
-                if (sum < target) {
-                    left++; // need a bigger sum
-                } else if (sum > target) {
-                    right--; // need a smaller sum
+
+                if (currSum == target) {
+                    return currSum; // exact match
+                } else if (currSum < target) {
+                    left++;
                 } else {
-                    return sum; // exact match
+                    right--;
                 }
             }
         }
-        
+
         return closestSum;
     }
 };
