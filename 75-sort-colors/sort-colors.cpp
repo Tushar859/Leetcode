@@ -1,19 +1,37 @@
 class Solution {
 public:
     void sortColors(vector<int>& nums) {
-        vector<int> sorted;
-        map<int,int> freq;
-        for(int i =0;i<nums.size();i++){
-            // yha hum freq count kr liye sare number ki
-            freq[nums[i]]++;
-        }
-        for(auto x : freq){
-            while(x.second!=0){
-               sorted.push_back(x.first);
-            x.second--;
-            }
-           
-        }
-            nums = sorted;
+    int cntzero =0;
+    int cntone=0;
+    int cnttwo=0;
+    for(int i=0;i<nums.size();i++){
+     if(nums[i]==0){
+        cntzero++;
+     }
+     else if(nums[i]==1){
+        cntone++;
+     }
+     else{
+        cnttwo++;
+     }
     }
+    vector<int> ans;
+    
+    while(cntzero--){
+        ans.push_back(0);
+    }
+    while(cntone--){
+    ans.push_back(1);}
+ 
+    while(cnttwo--){
+         ans.push_back(2);
+    }
+ 
+  nums = ans;
+
+    }
+
+
+
+    
 };
