@@ -5,6 +5,7 @@ public:
     if(curr >= nums.size()){
         return 0;
     }
+    // +1 iss liye kia hu as prev -1 hain nd dp[][-1] donot exist
     if(dp[curr][prev+1]!=-1){
         return dp[curr][prev+1];
     }
