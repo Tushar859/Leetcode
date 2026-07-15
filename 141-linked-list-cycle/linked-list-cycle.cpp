@@ -9,18 +9,30 @@
 class Solution {
 public:
     bool hasCycle(ListNode *head) {
-        if(head==NULL){
+        // null ll sambhal lia
+        if(head == NULL){
             return false;
         }
-        ListNode *slow = head;
-         ListNode *fast = head;
-         while(fast->next!=NULL && fast->next->next!=NULL){
-            slow = slow->next;
-            fast = fast->next->next;
-            if(slow==fast){
-                return true;
+        //single element sambhal lia
+        if(head->next == NULL){
+            return false;
+        }
+
+     
+
+        ListNode* slow = head;
+        ListNode* fast = head;
+        while(fast!= NULL){
+            // ek step fast 
+            fast = fast->next;
+            if(fast != NULL){
+                fast = fast->next;
+                if(fast== slow){
+                    return true;
+                }
+                slow = slow->next;
             }
-         }
-         return false;
+        }
+    return false;
     }
 };
