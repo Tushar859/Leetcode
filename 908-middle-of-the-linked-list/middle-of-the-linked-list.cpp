@@ -11,28 +11,19 @@
 class Solution {
 public:
     ListNode* middleNode(ListNode* head) {
+        ListNode* fast = head;
+        ListNode* slow = head;
 
-        if (head == nullptr || head->next == nullptr) {
-            return head;
+        while(fast!=NULL ){
+            // ek step fast chale
+            // phr next step slow chale
+            fast = fast->next;
+            if(fast!=NULL){
+              
+                slow = slow->next;
+                  fast = fast->next;
+            }
         }
-
-        int count = 0;
-        ListNode* curr = head;
-
-       
-        while (curr != nullptr) {
-            count++;
-            curr = curr->next;
-        }
-
-        int middle = count / 2;   
-
-        curr = head;  
-
-        while (middle--) {
-            curr = curr->next;
-        }
-
-        return curr;
+     return slow;
     }
 };
