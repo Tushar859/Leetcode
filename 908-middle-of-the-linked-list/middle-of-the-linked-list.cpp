@@ -19,9 +19,9 @@ public:
             // phr next step slow chale
             fast = fast->next;
             if(fast!=NULL){
-              
+               fast = fast->next;
                 slow = slow->next;
-                  fast = fast->next;
+                 
             }
         }
      return slow;
