@@ -12,19 +12,19 @@ class Solution {
 public:
     ListNode* middleNode(ListNode* head) {
      // tortoise algo ek step slow chalgea and 2 step fast chalgea
-     
+
         ListNode* fast = head;
         ListNode* slow = head;
 
-        while(fast!=NULL ){
+        while(fast!=NULL && fast->next != nullptr ){
             // ek step fast chale
             // phr next step slow chale
             fast = fast->next;
-            if(fast!=NULL){
+            //if(fast!=NULL){
                fast = fast->next;
                 slow = slow->next;
                  
-            }
+           // }
         }
      return slow;
     }
