@@ -11,6 +11,8 @@
 class Solution {
 public:
     ListNode* middleNode(ListNode* head) {
+     // tortoise algo ek step slow chalgea and 2 step fast chalgea
+     
         ListNode* fast = head;
         ListNode* slow = head;
 
