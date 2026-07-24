@@ -1,30 +1,33 @@
 class Solution {
 public:
-    bool isPalindrome(string s) {
+    bool isPalindrome(string& s) {
+        for (auto &ch : s) {
+            ch = tolower(ch);
+        }
+        
         string ans;
-        string clear="";
-
-        for(int i=0;i<s.size();i++){
-            char ch=s[i];
-            if ((ch >= 'A' && ch <= 'Z') || 
-              (ch >= 'a' && ch <= 'z') || 
-                (ch >= '0' && ch <= '9')){
-
-                clear+=tolower(ch);
+        for (auto t : s) {
+            if (t >= 'a' && t <= 'z' ) {
+                // valid alphanumeric chat
+                ans += t;
+            }
+            if(t>='0'&&t<='9'){
+                 ans += t;
                 
             }
-
         }
-        ans=clear;
-        reverse(clear.begin(), clear.end());
-        if(ans == clear){
-            return true;
+      
+        int start = 0;
+        int end = ans.size() - 1;
+        while (start <= end) {
+            if (ans[start] != ans[end]) {
+                return false;
+                break;
+            }
+            start++;
+            end--;
         }
-        else{
-            return false;
-        }
-
-
-        
+        // yha tak aa gye to matched
+        return true;
     }
 };
