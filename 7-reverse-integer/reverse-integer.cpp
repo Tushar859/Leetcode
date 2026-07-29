@@ -21,25 +21,25 @@ public:
          rev(num);
         
         // lets remove leading zero
-        int i=0;
-        while(i<num.size()&&num[i]==0){
-            i++;}
+        // int i=0;
+        // while(i<num.size()&&num[i]=='0'){
+        //     i++;}
 
 
-         if(i==num.size()){
-            // iska mtlb sare zeros h
-            return 0;
-         } 
+        //  if(i==num.size()){
+        //     // iska mtlb sare zeros h
+        //     return 0;
+        //  } 
         
-        num = num.substr(i);
+        // num = num.substr(i);
      
     long long ans = stoll(num);
      if(neg){
         ans = -ans;
      }
      // Overflow check
-        if (ans > INT_MAX || ans < INT_MIN)
-            return 0;
+    if (ans > INT_MAX || ans < INT_MIN)
+         return 0;
 
 
 
