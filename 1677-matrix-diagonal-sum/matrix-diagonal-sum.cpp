@@ -1,16 +1,20 @@
 class Solution {
 public:
     int diagonalSum(vector<vector<int>>& mat) {
-    int sum =0;
-    int n= mat.size();
-    for(int i=0;i<mat.size();i++){
-        sum+=mat[i][i];
-        if(i!=n-i-1){
-        sum+=mat[i][n-i-1]; // isse hum 2nd diagonal elements ko dekh rhe duplicate remove kr rhe haain
+        int n = mat.size();
+        vector<vector<bool>> flag(n, vector<bool>(n, false));
+        int  diag1=0,diag2=0;
+        for(int i=0;i<mat.size();i++){
+            if(flag[i][i]==false){
+                diag1+=mat[i][i];
+                flag[i][i] = true;
+            }
+         if(!flag[i][n-i-1])
+            diag2+= mat[i][n-i-1];
+            flag[i][n-i-1]=true;
+           
         }
-       
-    }
-    
-    return sum;
+
+     return (diag2+diag1);
     }
 };
