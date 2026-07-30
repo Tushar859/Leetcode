@@ -19,7 +19,7 @@ public:
                     m[r]++;
                  }
                  else{
-                     m[r]=1;
+                     m[r]++;
                  }
         }
 
