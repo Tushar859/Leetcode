@@ -10,7 +10,7 @@ public:
       int left = 0;
      
  while(top<=bottom && left <=right){
-    // top se right
+    // left se right
      for(int i =left;i<=right;i++){
         ans.push_back(mat[top][i]);
      }
@@ -28,7 +28,7 @@ public:
             ans.push_back(mat[bottom][i]);
          }
     bottom--;
-    // top se right
+    // bottom se top
     if(left <= right)
          for(int i=bottom;i>=top;i--){
              ans.push_back(mat[i][left]);
