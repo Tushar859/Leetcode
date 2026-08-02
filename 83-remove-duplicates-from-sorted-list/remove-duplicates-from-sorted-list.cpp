@@ -11,16 +11,26 @@
 class Solution {
 public:
     ListNode* deleteDuplicates(ListNode* head) {
-        ListNode* temp= head;
-        while(temp!=NULL && temp->next!=NULL){
-            if(temp->val==temp->next->val){
-                //aage wala value same ho to hum ise skip krenge
-            temp->next=temp->next->next;
-            }
-            else{
-                temp=temp->next;
-            }
+     ListNode* dummy = new ListNode(-99);
+      dummy->next = head;
+    //   ListNode* temp = head;
+      ListNode* prev = dummy;
+      ListNode* curr = head;
+      while(curr!=nullptr){
+        if(curr->val == prev->val){
+            // duplicate mil gya
+            // isolate and delete it
+            prev->next = curr->next;
+            curr->next= nullptr;
+            delete curr;
+            curr = prev->next;
         }
-        return head;
+        else{
+            prev = curr;
+            curr = curr->next;
+         }
+      }   
+    return dummy->next;
+
     }
 };
