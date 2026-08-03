@@ -1,52 +1,49 @@
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
- */
 class Solution {
 public:
-    bool isPalindrome(ListNode* head) {
-       int count=0;
-       if(head->next==nullptr){
-        return 1;
-       }
-       ListNode*temp=head;
-       while(temp){
-        count++;
-        temp=temp->next;
-       }
-       count/=2;
-       ListNode*curr=head;
-       ListNode*prev=nullptr;
-       while(count--){
-        prev=curr;
-        curr=curr->next;
-       }
-       prev->next=nullptr;
-       ListNode*front;
-       prev=nullptr;
-       while(curr){
-        front=curr->next;
-        curr->next=prev;
-        prev=curr;
-        curr=front;
-       }
-       ListNode*head1=head;
-        ListNode*head2=prev;
-        while(head1){
-            if(head1->val!= head2->val){
-                return 0;
-            }
-            head1=head1->next;
-            head2=head2->next;
+    ListNode* reverseList(ListNode* head) {
+        ListNode* prev = nullptr;
+        ListNode* curr = head;
+
+        while (curr != nullptr) {
+            ListNode* nextNode = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = nextNode;
         }
 
-        return 1;
+        return prev;
+    }
 
+    bool isPalindrome(ListNode* head) {
+
+        if (head == nullptr || head->next == nullptr)
+            return true;
+
+        // Deep copy of the list
+        ListNode* copyHead = new ListNode(head->val);
+        ListNode* p1 = head->next;
+        ListNode* p2 = copyHead;
+
+        while (p1 != nullptr) {
+            p2->next = new ListNode(p1->val);
+            p2 = p2->next;
+            p1 = p1->next;
+        }
+
+        // Reverse the copied list
+        ListNode* head2 = reverseList(copyHead);
+
+        ListNode* temp1 = head;
+        ListNode* temp2 = head2;
+
+        while (temp1 != nullptr && temp2 != nullptr) {
+            if (temp1->val != temp2->val)
+                return false;
+
+            temp1 = temp1->next;
+            temp2 = temp2->next;
+        }
+
+        return true;
     }
 };
