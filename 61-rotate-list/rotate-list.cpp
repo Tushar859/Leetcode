@@ -1,4 +1,3 @@
-
 /**
  * Definition for singly-linked list.
  * struct ListNode {
@@ -11,38 +10,43 @@
  */
 class Solution {
 public:
+
+    ListNode* findNode(ListNode* head, int pos)
+    {
+        while(pos > 1)
+        {
+            head = head->next;
+            pos--;
+        }
+
+        return head;
+    }
+
     ListNode* rotateRight(ListNode* head, int k) {
-        if(head==nullptr || head->next==nullptr){
-            return head;
-        }
-         int count=0;
-        ListNode*temp=head;
-        while(temp){
-            count++;
-            temp=temp->next;
-        }
-        k=k%count;
-        count=count-k;
-        if(k==0){
-            return head;
-        }
-        ListNode*curr=head;
-        ListNode*prev=nullptr;
 
-        while(count--){
-            prev=curr;
-            curr=curr->next;
-        }
-        prev->next=nullptr;
-        ListNode*tail=curr;
-        while(tail->next!=nullptr){
-            tail=tail->next;
-        }
-      
-       tail->next=head;
-       head=curr;
-       return head;
+        if(head == nullptr || head->next == nullptr || k == 0)
+            return head;
+            
+        int len = 1;
+        ListNode* tail = head;
 
-        
+        while(tail->next != nullptr)
+        {
+            len++;
+            tail = tail->next;
+        }
+        k = k % len;
+        if(k == 0)
+            return head;
+        // Make circular linked list
+        tail->next = head;
+        // Find new last node
+        ListNode* newLastNode = findNode(head, len - k);
+        // New head
+        head = newLastNode->next;
+        // Break the link
+        newLastNode->next = nullptr;
+
+        return head;
     }
 };
