@@ -1,22 +1,31 @@
 class Solution {
 public:
     int romanToInt(string s) {
-        unordered_map<char, int> roman = {
-            {'I', 1}, {'V', 5}, {'X', 10}, {'L', 50},
-            {'C', 100}, {'D', 500}, {'M', 1000}
-        };
-
-        int result = 0;
-        for (int i = 0; i < s.size(); i++) {
-            // If next value is greater, subtract current
-            if (i + 1 < s.size() && roman[s[i]] < roman[s[i + 1]]) {
-                result -= roman[s[i]];
-            } 
-            // Otherwise, add current
-            else {
-                result += roman[s[i]];
+        int n = s.size();
+    unordered_map<char,int>m;
+     // define reln of 
+        m['I'] = 1;
+        m['V'] = 5;
+        m['X'] = 10;
+        m['L'] = 50;
+        m['C'] = 100;
+        m['D'] = 500;
+        m['M'] = 1000;
+        int sum=0;
+        int index =0;
+        while(index<s.size()-1){
+            if(m[s[index]]<m[s[index+1]]){
+                sum-=m[s[index]];
             }
+            else{
+                sum+=m[s[index]];
+            }
+         index++;
+
         }
-        return result;
+        // last char ko add krdo
+         sum +=m[s[n-1]];
+     return sum;
+
     }
 };
