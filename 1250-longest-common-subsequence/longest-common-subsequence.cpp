@@ -1,0 +1,28 @@
+class Solution {
+public:
+     vector<vector<int>>dp;
+    int solve(int n,int m,string& s, string& t){
+      if(n==0 || m==0){
+        return 0;
+      }
+      if(dp[n][m]!=-1){
+        return dp[n][m];
+      }
+      // mtch
+     if(s[n-1]==t[m-1]){
+        return dp[n][m]= 1 + solve(n-1,m-1,s,t);
+     }  
+     else{
+        // no mtch
+        return dp[n][m]=max(solve(n-1,m,s,t),solve(n,m-1,s,t));
+     }
+     
+
+    }
+    int longestCommonSubsequence(string text1, string text2) {
+      int n = text1.size();
+       int m = text2.size();
+       dp.assign(n+11,vector<int>(m+11,-1));
+     return solve(n,m,text1,text2);
+    }
+};
