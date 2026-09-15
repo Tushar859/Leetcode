@@ -54,7 +54,7 @@ public:
         int n = s.size();
         int m = p.size();
 
-        dp.resize(n+1, vector<int>(m+1, -1));
+        dp.assign(n+1, vector<int>(m+1, -1));
 
         return solve(n, m, s, p);
     }
