@@ -1,35 +1,27 @@
 class Solution {
 public:
-     int solvebyrec(vector<int>& nums, int curr , int prev , vector<vector<int>>& dp){
-    // base case
-    if(curr >= nums.size()){
-        return 0;
-    }
-    // +1 iss liye kia hu as prev -1 hain nd dp[][-1] donot exist
-    if(dp[curr][prev+1]!=-1){
-        return dp[curr][prev+1];
-    }
-    // incldue
-    int include =0;
-    if(prev==-1 || nums[curr]>nums[prev]){
-         include = 1 + solvebyrec(nums,curr+1,curr,dp);
-    }
-    
-
-    // exclude
-     int exclude = 0 + solvebyrec(nums,curr+1,prev,dp);
-
-    int ans = max(include ,exclude);
-        dp[curr][prev+1] = ans;
-    return ans;
-    
-     }
-// two var are changing so 2d dp will be used
     int lengthOfLIS(vector<int>& nums) {
-    int n = nums.size();
-    vector<vector<int>> dp(n+200,vector<int>(n+200,-1));
-    int curr =0;
-    int prev =-1;
-    return solvebyrec(nums,curr,prev,dp);
+         int n = nums.size();
+        vector<int>lis(n,1);
+        int res =1;// as single element lis hota hi h
+        for(int i=1;i<n;i++){
+            for(int j=0;j<i;j++){
+                if(nums[i]>nums[j]){
+                    lis[i]=max(lis[i],lis[j]+1);
+                }
+            }
+           if(res<lis[i]){
+              res = lis[i];
+           }
+        }   
+        // int ans =0;    
+        // for(int i=0;i<lis.size();i++){
+        //      if(lis[i]>ans){
+        //         ans = lis[i];
+        //      }
+        // }
+        return res;
+        
+        
     }
 };
