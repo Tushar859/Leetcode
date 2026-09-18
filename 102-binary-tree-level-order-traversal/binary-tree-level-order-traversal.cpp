@@ -18,7 +18,7 @@ public:
                 q.pop();
                 l.push_back(val->val);
                 if(val->left){
-                    q.push({val->left, level + 1});
+                    q.push({val->left, level - 1});
                 }
                 if(val->right){
                     q.push({val->right, level + 1});
