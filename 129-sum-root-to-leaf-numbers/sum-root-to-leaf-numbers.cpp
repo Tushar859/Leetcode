@@ -11,30 +11,36 @@
  */
 class Solution {
 public:
-    void Traversal(TreeNode*root, vector<int>& ans,int value){
-        if(!root){
-            return;
-        }
-          value=value*10+root->val;
-        if(!root->left &&!root->right){
-            ans.push_back(value);
-            value=0;
-            return;
-           
-        }
-      
-        Traversal(root->left , ans, value);
-        Traversal(root->right, ans, value);
-    }
-    int sumNumbers(TreeNode* root) {
-        int value=0;
-        vector<int>ans;
-        Traversal(root, ans, value);
-        int sum=0;
-        for(int i=0;i<ans.size();i++){
-           sum+=ans[i];
+    void f(TreeNode* root, vector<int>&ans,int val){
+     if(root==nullptr){
+        return ;
+     }
+     val = val*10+root->val;
+     if(!root->left &&!root->right){
+            ans.push_back(val);
+            val=0;
+            return; 
         }
 
-        return sum;
+     
+     f(root->left,ans,val);
+      
+     f(root->right,ans,val);
+     
+
+
+    
+    }
+    int sumNumbers(TreeNode* root) {
+      
+      vector<int>ans;
+      f(root,ans,0);
+      int sum =0;
+      for(auto i : ans){
+        // cout<<i<<endl;
+        sum+=i;
+      }
+      return sum;
+
     }
 };
