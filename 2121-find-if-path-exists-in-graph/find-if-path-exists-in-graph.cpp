@@ -1,8 +1,8 @@
 class Solution {
 public:
     bool validPath(int n, vector<vector<int>>& edges, int src, int dest) {
-        if(edges.size()==0){
-            return true;
+         if(edges.size()== 0){
+            return src == dest;
         }
         vector<vector<int>>adj(n);
         for(int i=0;i<edges.size();i++){
