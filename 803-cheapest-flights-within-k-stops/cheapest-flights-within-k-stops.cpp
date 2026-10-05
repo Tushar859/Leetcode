@@ -36,7 +36,7 @@ public:
                 int nextNode = it.first;
                 int price = it.second;
 
-                if(cost + price < dist[nextNode]) {
+                if(cost + price < dist[nextNode] && stops<=k) {
 
                     dist[nextNode] = cost + price;
 
