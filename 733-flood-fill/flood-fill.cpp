@@ -1,49 +1,36 @@
 class Solution {
 public:
-
-    bool valid(int i,int j, int r, int c ){
-        return i>=0 && i<r && j>=0 && j<c;
-    }
-
-    vector<vector<int>> floodFill(vector<vector<int>>& image,
-                                  int sr, int sc, int color) {
-
-        int r=image.size();
-        int c=image[0].size();
-
-        int original=image[sr][sc];
-
-    
-        if(original==color) return image;
-
-        int row[4]={0,0,-1,1};
-        int col[4]={1,-1,0,0};
-
-        queue<pair<int,int>> qp;
-
-        qp.push({sr,sc});
-        image[sr][sc]=color;
-
-        while(!qp.empty()){
-
-            int i=qp.front().first;
-            int j=qp.front().second;
-            qp.pop();
-
-            for(int k=0;k<4;k++){
-
-                int new_i=i+row[k];
-                int new_j=j+col[k];
-
-                if(valid(new_i,new_j,r,c) &&
-                   image[new_i][new_j]==original){
-
-                    image[new_i][new_j]=color;
-                    qp.push({new_i,new_j});
-                }
-            }
+     int R;
+     int C;
+    int row[4] ={-1,0,0,1};
+    int  col[4] ={0,-1,1,0};
+     bool valid(int r , int c){
+      return (r>=0&&r<R&&c>=0&&c<C);
+     }
+    vector<vector<int>> floodFill(vector<vector<int>>& img, int sr, int sc, int color) {
+        queue<pair<int,int>>q;
+        if(img[sr][sc]==color){
+            return img;
         }
-
-        return image;
+        int ori =img[sr][sc];
+        img[sr][sc] = color;
+        q.push({sr,sc});
+        R = img.size();
+        C= img[0].size();
+        while(!q.empty()){
+            int i= q.front().first;
+            int j= q.front().second;
+            q.pop();
+            for(int k=0;k<4;k++){
+                int new_i = i + row[k];
+                int new_j = j + col[k];
+             if(valid(new_i,new_j) && img[new_i][new_j]==ori){
+                  img[new_i][new_j]=color;
+                  q.push({new_i,new_j});
+             }
+            }
+         
+        }
+    return img;
     }
 };
