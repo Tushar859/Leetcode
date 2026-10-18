@@ -22,7 +22,7 @@ int solve(int n,vector<int>& coins, int amt){
    }
     int change(int amount, vector<int>& coins) {
         int n = coins.size();
-        dp.assign(n+100,vector<int>(amount+1,-1));
+        dp.assign(n+1,vector<int>(amount+1,-1));
         return solve(n,coins,amount);
         
     }
