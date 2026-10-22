@@ -1,69 +1,65 @@
 class Solution {
 public:
-     bool valid(int i,int j,int r, int c){
-        return i>=0 && i<r && j>=0 && j<c;
-     }
-
+    int R;
+    int C;
+    int row[4] = {-1, 0, 0, 1};
+    int col[4] = {0, -1, 1, 0};
+    bool valid(int r, int c) {
+        return (r >= 0 && r < R && c >= 0 && c < C);
+    }
     int numEnclaves(vector<vector<int>>& grid) {
-        queue<pair<int,int>>pq;
-        int r=grid.size();
-        int c=grid[0].size();
-        //boundary top
-        for(int i=0;i<c;i++){
-            if(grid[0][i]==1){
-                pq.push({0,i});
-                grid[0][i]=0;
+        R = grid.size();
+        C = grid[0].size();
+        queue<pair<int,int>> q;
+    //    bourndayr wale 1 ko dALRW HAIN
+  
+     // First and last row
+        for(int i = 0; i < C; i++) {
+            if(grid[0][i] == 1) {
+                q.push({0, i});
+                grid[0][i] = 0;
             }
-            if(grid[r-1][i]){
-                pq.push({r-1,i});
-                grid[r-1][i]=0;
-            }
-        }
-
-        for(int i=1;i<r-1;i++){
-          if(grid[i][0]==1){
-            pq.push({i,0});
-            grid[i][0]=0;
-          }
-          if(grid[i][c-1]==1){
-            pq.push({i,c-1});
-            grid[i][c-1]=0;
-          }
-        }
-        int row[4]={1,-1,0,0};
-        int col[4]={0,0,1,-1};
-
-        while(!pq.empty()){
-            int i=pq.front().first;
-            int j=pq.front().second;
-            pq.pop();
-            for(int k=0;k<4;k++){
-                int new_i=row[k]+i;
-                int new_j=col[k]+j;
-                if(valid(new_i,new_j,r,c) && grid[new_i][new_j]==1){
-                   pq.push({new_i,new_j});
-                   grid[new_i][new_j]=0;
-                }
+            if(grid[R-1][i] == 1) {
+                q.push({R-1, i});
+                grid[R-1][i] = 0;
             }
         }
-
-       int count=0;
+        // First and last column
+        for(int j = 0; j < R; j++) {
+            if(grid[j][0] == 1) {
+                q.push({j, 0});
+                grid[j][0] = 0;
+            }
+            if(grid[j][C-1] == 1) {
+                q.push({j, C-1});
+                grid[j][C-1] = 0;
+            }
+        }
        
-        for(int i=0;i<grid.size();i++){
-            for(int j=0;j<grid[0].size();j++){
-             if(grid[i][j]==1){
-                count++;
-             }
+       
+     while(!q.empty()){
+        int x = q.front().first;
+        int y = q.front().second;
+        q.pop();
+        // nbr explore krt hain
+        for(int k=0;k<4;k++){
+            int i = x + row[k];
+            int j = y + col[k];
+            if(valid(i,j)&&grid[i][j]==1){
+                q.push({i,j});
+                grid[i][j]=0;
+            } 
+        }
+   }
+     int cnt =0;
+      for(int i=0;i<R;i++){
+        for(int j=0;j<C;j++){
+            if(grid[i][j]==1){
+                cnt++;
             }
         }
-
-
-
-        return count;
-        
-
-
-        // down
-    
+      }
+    return cnt;
+     
     }
 };
