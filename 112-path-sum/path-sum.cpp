@@ -11,30 +11,24 @@
  */
 class Solution {
 public:
-    bool inorder(TreeNode* root, int& target,int sum){
-    if( root == nullptr) return false;
-     if(root->left == nullptr && root->right == nullptr){
-        if(sum + root->val == target) return true;
-        else return false;
-     }
-
-     // l n r
+    bool f(TreeNode* root, int targetSum , int sum){
+      if(root==nullptr) return false;
+        if(root->left==nullptr && root->right==nullptr){
+            // cout<<sum; leaf node
+            return sum+root->val==targetSum;
+        }
+        // if(root!=nullptr) 
+          sum += root->val;
+     bool left = f(root->left,targetSum,sum);
+      bool right = f(root->right,targetSum,sum);
+      return left||right;
      
-   
-    
-      sum+=root->val;
-    bool lef = inorder(root->left,target,sum);
-     bool  righ =inorder(root->right,target,sum);
-    return lef||righ;
     }
-    bool hasPathSum(TreeNode* root, int target) {
-        // if(root==nullptr && target==0){
-        //     return true;
-        // }
-        if (!root) return false;
-      int sum =0;
-       return inorder(root,target,0);
-    
+    bool hasPathSum(TreeNode* root, int targetSum) {
+        if(root == nullptr){
+            return false;
+        }
+      return f (root,targetSum,0);
+        
     }
-
 };
